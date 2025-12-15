@@ -24,8 +24,8 @@ const Prediction: React.FC = () => {
           {/* Header Section */}
           <div className="px-6 py-8 md:px-12 md:py-10 border-b border-border-light flex flex-wrap justify-between items-center gap-6 bg-accent-gray/30">
             <div className="flex flex-col gap-2">
-              <h1 className="text-3xl md:text-4xl font-black text-text-main tracking-tight">Cardiovascular Disease Prediction</h1>
-              <p className="text-text-muted text-base md:text-lg font-medium">Enter patient clinical data to calculate risk probability.</p>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-main tracking-tight">Cardiovascular Disease Prediction</h1>
+              <p className="text-text-muted text-sm sm:text-base md:text-lg font-medium">Enter patient clinical data to calculate risk probability.</p>
             </div>
             <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <span className="material-symbols-outlined text-primary text-xl">ecg_heart</span>
@@ -224,7 +224,7 @@ const Prediction: React.FC = () => {
             </div>
 
             {/* Results Sidebar */}
-            <div className="lg:w-[400px] bg-gray-50 border-l border-border-light p-8 flex flex-col gap-8">
+            <div className="w-full lg:w-[400px] bg-gray-50 border-t lg:border-t-0 lg:border-l border-border-light p-8 flex flex-col gap-8">
               <div className="bg-white rounded-2xl p-6 border border-border-light shadow-lg relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
                   <span className="material-symbols-outlined text-8xl text-primary">monitor_heart</span>

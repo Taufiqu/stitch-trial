@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import Sidebar from '../components/Sidebar';
 import { NavLink } from 'react-router-dom';
@@ -19,21 +19,26 @@ const dataGender = [
 ];
 
 const Dashboard: React.FC = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex h-screen overflow-hidden bg-background-light">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="flex-1 flex flex-col h-full overflow-hidden bg-background-light relative">
         {/* Top Navbar for Dashboard */}
-        <nav className="w-full bg-card-white border-b border-border-light px-8 h-16 flex items-center justify-between shrink-0 shadow-sm z-20">
-          <div className="flex items-center gap-8">
-            <button className="lg:hidden text-text-muted hover:text-primary">
+        <nav className="w-full bg-card-white border-b border-border-light px-4 sm:px-8 h-16 flex items-center justify-between shrink-0 shadow-sm z-20">
+          <div className="flex items-center gap-4 sm:gap-8">
+            <button 
+              className="md:hidden text-text-muted hover:text-primary p-2 -ml-2 rounded-full hover:bg-accent-gray transition-colors"
+              onClick={() => setSidebarOpen(true)}
+            >
               <span className="material-symbols-outlined">menu</span>
             </button>
-            <div className="flex items-center gap-1">
-              <NavLink to="/" className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-full transition-colors shadow-md shadow-blue-200">Analytics</NavLink>
-              <NavLink to="/prediction" className="px-4 py-2 text-sm font-medium text-text-muted hover:text-primary hover:bg-accent-gray rounded-full transition-colors">Prediction</NavLink>
-              <NavLink to="/about" className="px-4 py-2 text-sm font-medium text-text-muted hover:text-primary hover:bg-accent-gray rounded-full transition-colors">About</NavLink>
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-1">
+              <NavLink to="/" className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white bg-primary rounded-full transition-colors shadow-md shadow-blue-200 whitespace-nowrap">Analytics</NavLink>
+              <NavLink to="/prediction" className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-text-muted hover:text-primary hover:bg-accent-gray rounded-full transition-colors whitespace-nowrap">Prediction</NavLink>
+              <NavLink to="/about" className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-text-muted hover:text-primary hover:bg-accent-gray rounded-full transition-colors whitespace-nowrap">About</NavLink>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -42,26 +47,29 @@ const Dashboard: React.FC = () => {
                 <span className="material-symbols-outlined text-text-muted text-[18px]">search</span>
               </span>
               <input 
-                className="bg-accent-gray border border-border-light text-text-main text-sm rounded-full pl-10 pr-4 py-1.5 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 w-64 placeholder-text-muted/70 transition-all" 
+                className="bg-accent-gray border border-border-light text-text-main text-sm rounded-full pl-10 pr-4 py-1.5 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 w-48 lg:w-64 placeholder-text-muted/70 transition-all" 
                 placeholder="Search patients..." 
                 type="text" 
               />
             </div>
+            <button className="sm:hidden text-text-muted p-2">
+               <span className="material-symbols-outlined">search</span>
+            </button>
           </div>
         </nav>
 
         {/* Dashboard Header */}
-        <header className="w-full px-8 py-6 flex flex-wrap justify-between items-center gap-4 shrink-0 bg-background-light z-10">
+        <header className="w-full px-4 sm:px-8 py-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-background-light z-10">
           <div className="flex flex-col gap-1">
-            <h2 className="text-3xl font-black tracking-tight text-text-main">Dashboard Overview</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-text-main">Dashboard Overview</h2>
             <p className="text-text-muted text-sm">Real-time cardiovascular disease dataset insights</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button className="size-10 rounded-full bg-white border border-border-light flex items-center justify-center hover:bg-accent-gray transition-colors text-text-muted hover:text-primary relative shadow-sm">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <button className="size-10 rounded-full bg-white border border-border-light flex items-center justify-center hover:bg-accent-gray transition-colors text-text-muted hover:text-primary relative shadow-sm shrink-0">
               <span className="material-symbols-outlined">notifications</span>
               <span className="absolute top-2 right-2 size-2 bg-danger rounded-full animate-pulse"></span>
             </button>
-            <NavLink to="/prediction" className="h-10 px-6 rounded-full bg-primary text-white font-bold text-sm hover:bg-primary-hover transition-colors flex items-center gap-2 shadow-lg shadow-blue-200">
+            <NavLink to="/prediction" className="flex-1 sm:flex-none h-10 px-6 rounded-full bg-primary text-white font-bold text-sm hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-200 whitespace-nowrap">
               <span className="material-symbols-outlined text-[20px]">add</span>
                 Add Patient Record
             </NavLink>
@@ -69,7 +77,7 @@ const Dashboard: React.FC = () => {
         </header>
 
         {/* Content Scroll Area */}
-        <div className="flex-1 overflow-y-auto px-8 pb-8">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 pb-8">
           <div className="max-w-[1400px] mx-auto flex flex-col gap-6">
             
             {/* Filter Row */}
@@ -204,7 +212,7 @@ const Dashboard: React.FC = () => {
                   <h3 className="text-text-main text-lg font-bold">Gender Split</h3>
                   <p className="text-text-muted text-xs">Cardio cases by gender</p>
                 </div>
-                <div className="flex-1 flex items-center justify-center relative">
+                <div className="flex-1 flex items-center justify-center relative min-h-[200px]">
                     <div className="relative size-48">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
